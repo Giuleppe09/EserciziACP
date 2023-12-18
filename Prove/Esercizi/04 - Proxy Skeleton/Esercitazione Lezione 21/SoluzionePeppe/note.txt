@@ -1,0 +1,1 @@
+non funziona una minchia sulla scrittura sul file e probabilmente c'è qualche errore sulla sincronizzazione però nel complesso non è male.

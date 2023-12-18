@@ -1,0 +1,34 @@
+Un'applicazione che gestisce operazioni di deposito e prelievo attraverso la comunicazione tra un client Python 
+e un server Java utilizzando JMS (Java Message Service) e socket.
+
+*Descrizione dell'applicazione di gestione di deposito e prelievo*:
+
+L'applicazione è progettata per gestire operazioni di deposito e prelievo attraverso una comunicazione asincrona tra un client Python e un server Java utilizzando JMS e socket. L'applicazione è suddivisa in tre componenti principali: il client Python, il dispatcher Java e il server Python.
+
+1. **Client Python (`client.py`):**
+   - Il client Python utilizza la libreria `stomp` per la comunicazione asincrona con il dispatcher Java tramite JMS.
+   - Viene creato un listener personalizzato (`MyListener`) che gestisce le risposte ricevute dal dispatcher.
+   - Il client invia richieste di deposito o prelievo al dispatcher su una coda di richieste (`/queue/request`) e ascolta le risposte sulla coda di risposte (`/queue/response`).
+
+2. **Dispatcher Java (`Dispatcher.java`):**
+   - Il dispatcher Java crea una connessione JMS utilizzando ActiveMQ e ascolta la coda di richieste (`request`) per gestire le richieste provenienti dal client Python.
+   - Quando riceve una richiesta, il dispatcher utilizza un listener (`DispatcherMsgListener`) per processare il messaggio e invoca un proxy (`DispatcherProxy`) per comunicare con il server Python tramite socket.
+   - Il dispatcher invia poi la risposta al client Python tramite JMS sulla coda di risposte (`response`).
+
+3. **Dispatcher Message Listener (`DispatcherMsgListener.java`):**
+   - Il listener gestisce i messaggi ricevuti dalla coda di richieste.
+   - In base al tipo di richiesta (deposito o prelievo), invoca il metodo corrispondente nel proxy per comunicare con il server Python attraverso il socket.
+
+4. **Dispatcher Proxy (`DispatcherProxy.java`):**
+   - Il proxy gestisce la comunicazione con il server Python attraverso un socket.
+   - Invia le richieste di deposito o prelievo al server Python e riceve le risposte.
+   - Dopo aver ottenuto la risposta dal server Python, invia la risposta al client Python tramite JMS.
+
+5. **Server Python (`server.py`):**
+   - Il server Python implementa un servizio (`Service`) con metodi `deposita` e `preleva`.
+   - Utilizza un skeleton (`ServiceSkeleton`) per gestire la comunicazione attraverso un socket e processa le richieste dei client attraverso un processo separato (`proc_fun`).
+   - Il server mantiene uno stato condiviso utilizzando una coda (`mp.Queue`) per gestire le richieste di deposito e prelievo.
+
+---
+
+Questa descrizione fornisce un'overview generale del funzionamento dell'applicazione. Ovviamente, il dettaglio delle implementazioni specifiche nei vari file è essenziale per comprendere appieno il comportamento dell'applicazione.

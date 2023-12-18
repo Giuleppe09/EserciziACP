@@ -1,0 +1,28 @@
+Server Multithread basato su code di messaggi.
+
+2 Entità: 
+
+*Client: Ciascun client può inviare N messaggi sulla coda Richiesta.
+Ogni messaggio contiene 2 informazioni: <TipoRichiesta, id_articolo>
+
+TipoRichiesta = (deposita o preleva).
+id_articolo = (intero)
+
+
+
+
+
+*Magazzino: gestisce coda circolare, dim 10.
+All'arrivo di un nuovo messaggio client, quindi c vo o listener, crea un thread worker che ne
+estrae le informazioni (TipoRichiesta e id_articolo).
+
+	Se deposita: inserisci in coda.
+	Se preleva: preleva id_articolo e lo restituisco al client tramite la coda Risposta.
+Coda piena: thread che deposita attesa.
+Coda vuota: thread che preleva in attesa.
+
+Vabbeh ProdCons normale.
+
+3 Client, ognuno con 10 messaggi.
+
+Noto che ci sono  2 code JMS: Richiesta e Risposta.

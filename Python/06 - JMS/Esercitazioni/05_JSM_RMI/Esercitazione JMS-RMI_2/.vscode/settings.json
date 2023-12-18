@@ -1,7 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "d:\\UNIVERSITA\\aaaaa\\TerzoAnno\\ASIPI\\Java\\apache-activemq-5.16.6\\activemq-all-5.16.6.jar"
-    ],
-    "java.project.outputPath": "bin"
-}

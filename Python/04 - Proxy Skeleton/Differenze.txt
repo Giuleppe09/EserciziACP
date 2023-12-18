@@ -1,9 +1,0 @@
-Una differenza principale sta principalmente sul come vengono inviati e poi ricevuti i messaggi che contengono metodi parametri.
-
-TCP --> semplicemente dato che abbiamo un unico canale da cui il thread assegnato a quella socket legge
-semplicemente al primo messaggio è il nome del metodo, mentre poi con letture successive ricavo poi i parametri.
-
- 
-UDP --> c'è la necessità di inserire una convenzione nei messaggi, in particolare per dividere le parole (metodi dai parametri e parametri dai parametri)
-si può utilizzare lo StringToken #. Questo è importante perchè noi in un unico messaggio manderemo metodo da invocare + parametri, discorso
-diverso rispetto a quanto accade in TCP dato che lì parliamo di uno stream di byte continuo.

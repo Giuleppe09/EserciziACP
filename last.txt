@@ -1,0 +1,334 @@
+CSV
+
+import csv
+
+# Esempio di scrittura in CSV
+data_da_scrivere = [
+    ["Nome", "Cognome", "Età"],
+    ["Mario", "Rossi", 30],
+    ["Luigi", "Verdi", 25],
+    ["Paola", "Bianchi", 35]
+]
+
+with open('dati.csv', mode='w', newline='') as file_csv:
+    writer = csv.writer(file_csv)
+    writer.writerows(data_da_scrivere)
+
+print("Dati scritti con successo nel file CSV.")
+
+# Esempio di lettura da CSV
+with open('dati.csv', mode='r') as file_csv:
+    reader = csv.reader(file_csv)
+    dati_letti = list(reader)
+
+# Stampa dei dati letti
+print("\nDati letti dal file CSV:")
+for riga in dati_letti:
+    print(riga)
+
+
+LinePlot
+
+import matplotlib.pyplot as plt
+
+# Dati di esempio
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
+
+# Creazione del line plot
+plt.plot(x, y)
+
+# Aggiunta di etichette agli assi
+plt.xlabel('Asse X')
+plt.ylabel('Asse Y')
+
+# Aggiunta di un titolo al grafico
+plt.title('Line Plot Semplice')
+
+# Visualizzazione del grafico
+plt.show()
+
+SubPlots
+
+import matplotlib.pyplot as plt
+
+# Dati di esempio
+x = list(range(10))
+y1 = [i**2 for i in x]
+y2 = [i**3 for i in x]
+
+# Creazione di subplots
+fig, axs = plt.subplots(2, 1, figsize=(8, 6))
+
+# Plot del primo subplot
+axs[0].plot(x, y1, color='blue')
+axs[0].set_title('y = x^2')
+
+# Plot del secondo subplot
+axs[1].plot(x, y2, color='red')
+axs[1].set_title('y = x^3')
+
+# Aggiunta di spaziatura tra i subplots
+plt.tight_layout()
+
+# Visualizzazione della figura con subplots
+plt.show()
+
+
+
+BarPlot
+
+import matplotlib.pyplot as plt
+
+# Dati di esempio
+categorie = ['Categoria A', 'Categoria B', 'Categoria C', 'Categoria D']
+valori = [10, 24, 15, 30]
+
+# Creazione del bar plot
+plt.bar(categorie, valori)
+
+# Aggiunta di etichette agli assi
+plt.xlabel('Categorie')
+plt.ylabel('Valori')
+
+# Aggiunta di un titolo al grafico
+plt.title('Bar Plot Semplice')
+
+# Visualizzazione del grafico
+plt.show()
+
+
+Grouped Bars
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Dati di esempio
+categorie = ['Categoria A', 'Categoria B', 'Categoria C']
+valori_set1 = [10, 15, 20]
+valori_set2 = [5, 12, 15]
+
+larghezza_barre = 0.35  # Larghezza delle barre
+
+# Calcolo delle posizioni delle barre per ciascun set di dati
+posizioni_set1 = np.arange(len(categorie))
+posizioni_set2 = [pos + larghezza_barre for pos in posizioni_set1]
+
+# Creazione delle barre raggruppate
+plt.bar(posizioni_set1, valori_set1, larghezza_barre, label='Set 1')
+plt.bar(posizioni_set2, valori_set2, larghezza_barre, label='Set 2')
+
+# Aggiunta di etichette e titolo
+plt.xlabel('Categorie')
+plt.ylabel('Valori')
+plt.title('Grouped Bars')
+
+# Aggiunta della legenda
+plt.legend()
+
+# Visualizzazione del grafico
+plt.show()
+
+
+Stacked Bars
+
+# Dati di esempio
+categorie = ['Categoria A', 'Categoria B', 'Categoria C']
+valori_set1 = [10, 15, 20]
+valori_set2 = [5, 12, 15]
+
+# Creazione delle barre impilate
+plt.bar(categorie, valori_set1, label='Set 1')
+plt.bar(categorie, valori_set2, bottom=valori_set1, label='Set 2')
+
+# Aggiunta di etichette e titolo
+plt.xlabel('Categorie')
+plt.ylabel('Valori')
+plt.title('Stacked Bars')
+
+# Aggiunta della legenda
+plt.legend()
+
+# Visualizzazione del grafico
+plt.show()
+
+Istogramma Np
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Dati di esempio
+dati = np.random.randn(1000)  # Dati casuali distribuiti normalmente
+
+# Creazione dell'istogramma
+plt.hist(dati, bins=20, color='blue', alpha=0.7)
+
+# Aggiunta di etichette e titolo
+plt.xlabel('Valori')
+plt.ylabel('Frequenza')
+plt.title('Istogramma')
+
+# Visualizzazione del grafico
+plt.show()
+
+Istogramma Lista
+
+import matplotlib.pyplot as plt
+
+# Lista di valori
+dati = [3, 5, 8, 5, 12, 7, 10, 8, 6, 4, 7, 9, 11, 13, 5, 8, 10]
+
+# Creazione dell'istogramma
+plt.hist(dati, bins=10, color='green', alpha=0.7)
+
+# Aggiunta di etichette e titolo
+plt.xlabel('Valori')
+plt.ylabel('Frequenza')
+plt.title('Istogramma con Valori dalla Lista')
+
+# Visualizzazione del grafico
+plt.show()
+
+
+BoxPlot Np
+
+# Dati di esempio
+dati_set1 = np.random.randn(100)
+dati_set2 = np.random.randn(100) + 2  # Aggiungi uno spostamento ai dati
+
+# Creazione del boxplot
+plt.boxplot([dati_set1, dati_set2], labels=['Set 1', 'Set 2'])
+
+# Aggiunta di etichette e titolo
+plt.xlabel('Set di Dati')
+plt.ylabel('Valori')
+plt.title('Boxplot')
+
+# Visualizzazione del grafico
+plt.show()
+
+
+BoxPlot Lista
+
+# Creazione del boxplot
+plt.boxplot([dati])
+
+# Aggiunta di etichette e titolo
+plt.xlabel('Set di Dati')
+plt.ylabel('Valori')
+plt.title('Boxplot con Valori dalla Lista')
+
+# Visualizzazione del grafico
+plt.show()
+
+Regressione Lineare
+
+
+import numpy as np
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+# Dati di esempio
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 4, 5, 4, 5])
+
+# Trasforma i dati in una matrice colonna (necessario per scikit-learn)
+X = x.reshape(-1, 1)
+
+# Crea un modello di regressione lineare
+modello = LinearRegression()
+
+# Addestra il modello
+modello.fit(X, y)
+
+# Fai previsioni
+y_pred = modello.predict(X)
+
+# Plot dei dati e della regressione lineare
+plt.scatter(x, y, label='Dati')
+plt.plot(x, y_pred, color='red', label='Regressione Lineare')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Regressione Lineare')
+plt.legend()
+plt.show()
+
+# Stampa i coefficienti della regressione
+print(f'Coefficiente angolare (pendenza): {modello.coef_[0]}')
+print(f'Intercetta: {modello.intercept_}')
+
+DataFrame
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Dati di esempio in formato di dizionario
+dati = {
+    'x': list(range(10)),
+    'y1': [i**2 for i in range(10)],
+    'y2': [i**3 for i in range(10)]
+}
+
+# Creazione di un DataFrame da un dizionario
+df = pd.DataFrame(dati)
+
+# Creazione di subplots
+fig, axs = plt.subplots(2, 1, figsize=(8, 6))
+
+# Plot del primo subplot
+axs[0].plot(df['x'], df['y1'], color='blue')
+axs[0].set_title('y = x^2')
+
+# Plot del secondo subplot
+axs[1].plot(df['x'], df['y2'], color='red')
+axs[1].set_title('y = x^3')
+
+# Aggiunta di spaziatura tra i subplots
+plt.tight_layout()
+
+# Visualizzazione della figura con subplots
+plt.show()
+
+
+Series
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Dati di esempio in formato di liste
+x = list(range(10))
+y1 = pd.Series([i**2 for i in range(10)], name='y1')
+y2 = pd.Series([i**3 for i in range(10)], name='y2')
+
+# Creazione di subplots
+fig, axs = plt.subplots(2, 1, figsize=(8, 6))
+
+# Plot del primo subplot
+axs[0].plot(x, y1, color='blue')
+axs[0].set_title('y = x^2')
+
+# Plot del secondo subplot
+axs[1].plot(x, y2, color='red')
+axs[1].set_title('y = x^3')
+
+# Aggiunta di spaziatura tra i subplots
+plt.tight_layout()
+
+# Visualizzazione della figura con subplots
+plt.show()
+
+
+Pandas CSV
+
+import pandas as pd
+
+# Caricare un file CSV in un DataFrame
+df = pd.read_csv('dati.csv')  # Assumi che ci sia un file 'dati.csv' nella stessa directory
+
+# Visualizzare le prime 5 righe del DataFrame
+print(df.head())
+
+# Salvare il DataFrame in un nuovo file CSV
+df.to_csv('nuovi_dati.csv', index=False)
+
+

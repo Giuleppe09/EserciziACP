@@ -70,14 +70,13 @@ public class Proxy implements IService{
 
     public String deposito(int val){
         String result =null;
-        
         try {
-
             Socket socket = new Socket(this.ad,this.p);
             DataOutputStream output = new DataOutputStream(socket.getOutputStream());
             
             // NOTE: A BufferedReader is used to receive data from a Python application, since it allows using the readLine method 
 			BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
 
             String method = "deposito#"+val;
 

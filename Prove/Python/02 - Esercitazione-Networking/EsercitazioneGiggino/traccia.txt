@@ -1,0 +1,37 @@
+### Traccia
+
+#### Scopo del Sistema
+
+Sviluppare un sistema distribuito basato su messaggistica STOMP, che consente a un client di inviare richieste a un server attraverso un dispatcher. Il server gestisce le richieste utilizzando processi multipli, mentre il dispatcher si occupa di instradare le richieste al server.
+
+#### Struttura del Sistema
+
+1. Server Implementation (Server.py):
+   - Implementare la classe `ServiceImpl` che eredita da `ServiceSkeleton`. Questa classe gestirà le richieste dei client.
+   - Implementare i metodi `deposita` e `preleva` della classe `ServiceImpl`, che manipoleranno una coda condivisa (`Queue`) per gestire le richieste dei client.
+   - La classe `ServiceSkeleton` deve implementare un metodo `run_skeleton` che crei e gestisca un socket, ascoltando le richieste dei client e avviando processi multipli per gestire ciascuna richiesta.
+
+2. **Dispatcher Implementation (dispatcher.py):**
+   - Implementare la classe `MyListener` che eredita da `stomp.ConnectionListener`. Questa classe gestirà le richieste ricevute dal client attraverso il broker STOMP.
+   - Nel metodo `on_message` della classe `MyListener`, creare un'istanza della classe `ServiceProxy` e avviare un processo per gestire la richiesta utilizzando la funzione `proc_fun`.
+
+3. **Client Implementation (client.py):**
+   - Creare una connessione STOMP verso il broker (IP: 127.0.0.1, Porta: 61613).
+   - Implementare un loop che invii richieste di deposito o prelievo al server attraverso la coda 'request'.
+   - Utilizzare la classe `MyListener` come listener per gestire le risposte del server sulla coda 'response'.
+
+4. **ServiceProxy Implementation (dispatcher.py):**
+   - Implementare la classe `ServiceProxy` che rappresenta un proxy per invocare i metodi del server attraverso una connessione socket.
+   - Implementare i metodi `deposita` e `preleva` della classe `ServiceProxy` per inviare le richieste al server e ricevere le risposte.
+
+5. **Esecuzione del Sistema:**
+   - Avviare il server, il dispatcher e uno o più client.
+   - Il server gestirà le richieste dei client attraverso processi multipli.
+   - Il dispatcher instraderà le richieste dei client al server.
+   - Il client invierà richieste al server e riceverà risposte attraverso il dispatcher.
+
+6. **Note Aggiuntive:**
+   - Assicurarsi di gestire correttamente la terminazione dei processi e delle connessioni.
+   - Gestire eventuali situazioni eccezionali e fornire informazioni di debug se necessario.
+
+Ricorda che questa è solo una traccia di alto livello, e puoi personalizzare ulteriormente il codice in base alle tue esigenze specifiche e ai dettagli implementativi desiderati.

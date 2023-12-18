@@ -1,5 +1,0 @@
-{
-    "python.analysis.extraPaths": [
-        "./prod_cons_CV"
-    ]
-}
